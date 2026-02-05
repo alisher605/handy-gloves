@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Send, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,8 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 
 const faqs = [
 	{
@@ -54,6 +56,7 @@ export const Contact = () => {
 		message: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const formRef = useRef<HTMLFormElement>(null);
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -68,11 +71,28 @@ export const Contact = () => {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate form submission
-		await new Promise((resolve) => setTimeout(resolve, 1500));
+		try {
+			if (formRef.current) {
+				const response = await emailjs.sendForm(
+					"service_1bpa2yf",
+					"template_uqmopxk",
+					formRef.current,
+					"XmCvWE5a8-e2SOh0Z",
+				);
 
-		setFormData({ name: "", email: "", subject: "", message: "" });
-		setIsSubmitting(false);
+				if (response.status === 200) {
+					toast.success(
+						"Message sent successfully! We'll get back to you soon.",
+					);
+					setFormData({ name: "", email: "", subject: "", message: "" });
+				}
+			}
+		} catch (error) {
+			console.error("Error sending email:", error);
+			toast.error("Failed to send message. Please try again.");
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -117,7 +137,7 @@ export const Contact = () => {
 							<h3 className="font-display font-bold text-2xl mb-6">
 								Send Us a Message
 							</h3>
-							<form onSubmit={handleSubmit} className="space-y-6">
+							<form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
 								<div className="grid sm:grid-cols-2 gap-6">
 									<div className="space-y-2">
 										<Label htmlFor="name">Name</Label>

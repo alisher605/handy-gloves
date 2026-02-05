@@ -1,12 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, Instagram } from "lucide-react";
 
 const socialLinks = [
-	{ icon: Twitter, href: "#", label: "Twitter" },
-	{ icon: Linkedin, href: "#", label: "LinkedIn" },
-	{ icon: Github, href: "#", label: "GitHub" },
-	{ icon: Mail, href: "mailto:hello@handy.tech", label: "Email" },
+	{
+		icon: Instagram,
+		href: "https://www.instagram.com/handy.glove/",
+		label: "Instagrm",
+	},
+	{ icon: Mail, href: "handy.wearables@gmail.com", label: "Email" },
 ];
 
 const footerLinks = [

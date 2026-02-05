@@ -62,9 +62,11 @@ export const Navbar = () => {
 							{link.name}
 						</a>
 					))}
-					<Button variant="glow" size="sm">
-						Get Started
-					</Button>
+					<a href="contact">
+						<Button variant="glow" size="sm">
+							Get Started
+						</Button>
+					</a>
 				</div>
 
 				{/* Mobile Menu Button */}
