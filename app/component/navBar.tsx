@@ -62,7 +62,7 @@ export const Navbar = () => {
 							{link.name}
 						</a>
 					))}
-					<a href="contact">
+					<a href="#contact">
 						<Button variant="glow" size="sm">
 							Get Started
 						</Button>

@@ -60,7 +60,7 @@ export const Hero = () => {
 
 						{/* CTAs */}
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-							<a href="contact">
+							<a href="#contact">
 								<Button variant="glow" size="lg" className="group">
 									Pre-Order Now
 									<ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
