@@ -52,6 +52,7 @@ export const Contact = () => {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
+		phone: "",
 		subject: "",
 		message: "",
 	});
@@ -83,13 +84,22 @@ export const Contact = () => {
 				if (response.status === 200) {
 					toast.success(
 						"Message sent successfully! We'll get back to you soon.",
+						{ duration: 4000 },
 					);
-					setFormData({ name: "", email: "", subject: "", message: "" });
+					setFormData({
+						name: "",
+						email: "",
+						phone: "",
+						subject: "",
+						message: "",
+					});
 				}
 			}
 		} catch (error) {
 			console.error("Error sending email:", error);
-			toast.error("Failed to send message. Please try again.");
+			toast.error("Failed to send message. Please try again.", {
+				duration: 5000,
+			});
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -161,6 +171,20 @@ export const Contact = () => {
 											value={formData.email}
 											onChange={handleChange}
 											required
+											autoComplete="email"
+											className="bg-muted/50 border-border/50 focus:border-primary"
+										/>
+									</div>
+									<div className="space-y-2">
+										<Label htmlFor="phone">Phone</Label>
+										<Input
+											id="phone"
+											name="phone"
+											type="tel"
+											placeholder="+1 (555) 000-0000"
+											value={formData.phone}
+											onChange={handleChange}
+											autoComplete="tel"
 											className="bg-muted/50 border-border/50 focus:border-primary"
 										/>
 									</div>

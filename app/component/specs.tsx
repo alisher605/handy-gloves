@@ -44,12 +44,12 @@ const specs = [
 ];
 
 const components = [
-	{ name: "ESP32-S3 Module", price: "PKR 1,500" },
-	{ name: "MPU6050 IMU Sensor", price: "PKR 500" },
-	{ name: "Li-ion Battery + Charger", price: "PKR 2,000" },
-	{ name: "Flex Sensors (5x)", price: "PKR 1,500" },
-	{ name: "3D Printed Housing", price: "PKR 3,000" },
-	{ name: "Wiring & Connectors", price: "PKR 1,000" },
+	{ name: "ESP32-S3 Module" },
+	{ name: "MPU6050 IMU Sensor" },
+	{ name: "Li-ion Battery + Charger" },
+	{ name: "Flex Sensors (5x)" },
+	{ name: "3D Printed Housing" },
+	{ name: "Wiring & Connectors" },
 ];
 
 export const Specs = () => {
@@ -154,22 +154,11 @@ export const Specs = () => {
 										whileInView={{ opacity: 1, x: 0 }}
 										viewport={{ once: true }}
 										transition={{ duration: 0.4, delay: index * 0.1 }}
-										className="flex items-center justify-between py-3 border-b border-border/50 last:border-0"
+										className="py-3 border-b border-border/50 last:border-0"
 									>
 										<span className="text-foreground">{component.name}</span>
-										<span className="text-primary font-medium">
-											{component.price}
-										</span>
 									</motion.div>
 								))}
-							</div>
-							<div className="mt-6 pt-6 border-t border-border flex items-center justify-between">
-								<span className="font-display font-bold text-lg">
-									Total Hardware Cost
-								</span>
-								<span className="text-gradient text-xl font-display font-bold">
-									PKR 9,500
-								</span>
 							</div>
 						</div>
 
