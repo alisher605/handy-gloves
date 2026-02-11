@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Send, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,6 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import emailjs from "@emailjs/browser";
-import { toast } from "sonner";
 
 const faqs = [
 	{
@@ -55,8 +54,19 @@ export const Contact = () => {
 		subject: "",
 		message: "",
 	});
+	const [notice, setNotice] = useState<{
+		type: "success" | "error";
+		message: string;
+	} | null>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const formRef = useRef<HTMLFormElement>(null);
+
+	useEffect(() => {
+		if (!notice) return;
+		const duration = notice.type === "success" ? 4000 : 5000;
+		const timeout = setTimeout(() => setNotice(null), duration);
+		return () => clearTimeout(timeout);
+	}, [notice]);
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -69,6 +79,7 @@ export const Contact = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setNotice(null);
 		setIsSubmitting(true);
 
 		try {
@@ -81,10 +92,11 @@ export const Contact = () => {
 				);
 
 				if (response.status === 200) {
-					toast.success(
-						"Message sent successfully! We'll get back to you soon.",
-						{ duration: 4000 },
-					);
+					setNotice({
+						type: "success",
+						message:
+							"Message sent successfully! We'll get back to you soon.",
+					});
 					setFormData({
 						name: "",
 						email: "",
@@ -95,8 +107,9 @@ export const Contact = () => {
 			}
 		} catch (error) {
 			console.error("Error sending email:", error);
-			toast.error("Failed to send message. Please try again.", {
-				duration: 5000,
+			setNotice({
+				type: "error",
+				message: "Failed to send message. Please try again.",
 			});
 		} finally {
 			setIsSubmitting(false);
@@ -217,6 +230,18 @@ export const Contact = () => {
 										</>
 									)}
 								</Button>
+								{notice && (
+									<div
+										className={`rounded-xl border px-4 py-3 text-sm ${
+											notice.type === "success"
+												? "border-primary/30 bg-primary/10 text-primary"
+												: "border-destructive/30 bg-destructive/10 text-destructive"
+										}`}
+										role="status"
+									>
+										{notice.message}
+									</div>
+								)}
 							</form>
 						</div>
 					</motion.div>
