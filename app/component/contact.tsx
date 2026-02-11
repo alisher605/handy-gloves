@@ -52,7 +52,6 @@ export const Contact = () => {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
-		phone: "",
 		subject: "",
 		message: "",
 	});
@@ -89,7 +88,6 @@ export const Contact = () => {
 					setFormData({
 						name: "",
 						email: "",
-						phone: "",
 						subject: "",
 						message: "",
 					});
@@ -162,29 +160,15 @@ export const Contact = () => {
 										/>
 									</div>
 									<div className="space-y-2">
-										<Label htmlFor="email">Email</Label>
+										<Label htmlFor="email">Email or Phone</Label>
 										<Input
 											id="email"
 											name="email"
-											type="email"
-											placeholder="you@example.com"
+											type="text"
+											placeholder="you@example.com or +1 (555) 000-0000"
 											value={formData.email}
 											onChange={handleChange}
 											required
-											autoComplete="email"
-											className="bg-muted/50 border-border/50 focus:border-primary"
-										/>
-									</div>
-									<div className="space-y-2">
-										<Label htmlFor="phone">Phone</Label>
-										<Input
-											id="phone"
-											name="phone"
-											type="tel"
-											placeholder="+1 (555) 000-0000"
-											value={formData.phone}
-											onChange={handleChange}
-											autoComplete="tel"
 											className="bg-muted/50 border-border/50 focus:border-primary"
 										/>
 									</div>
