@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,6 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
 	{ name: "Home", href: "#hero" },
 	{ name: "Features", href: "#features" },
-	{ name: "Specs", href: "#specs" },
 	{ name: "Contact", href: "#contact" },
 ];
 
@@ -38,13 +38,18 @@ export const Navbar = () => {
 				{/* Logo */}
 				<motion.a
 					href="#hero"
-					className="flex items-center gap-2 group"
+					className="flex items-center gap-3 group"
 					whileHover={{ scale: 1.02 }}
 				>
-					<div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-						<span className="text-primary font-display font-bold text-lg">
-							H
-						</span>
+					<div className="w-10 h-10 bg-primary/10 border border-primary/30 overflow-hidden flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+						<Image
+							src="/logo.jpg"
+							alt="Handy logo"
+							width={40}
+							height={40}
+							priority
+							className="h-10 w-10 object-cover"
+						/>
 					</div>
 					<span className="font-display font-bold text-xl text-foreground">
 						Handy
